@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,6 +43,68 @@
             background-image: radial-gradient(at 0% 0%, hsla(220,100%,95%,1) 0, transparent 50%), 
                               radial-gradient(at 50% 0%, hsla(210,100%,98%,1) 0, transparent 50%), 
                               radial-gradient(at 100% 0%, hsla(200,100%,95%,1) 0, transparent 50%);
+        }
+        
+        /* Consistent Button Design System */
+        .btn-base {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            user-select: none;
+        }
+        .btn-base:active { transform: scale(0.95); }
+        
+        .btn-primary {
+            @extend .btn-base;
+            background-color: #2563eb;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.2);
+        }
+        .btn-primary:hover { background-color: #1d4ed8; box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.3); }
+
+        .btn-dark {
+            @extend .btn-base;
+            background-color: #0f172a;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 1rem;
+        }
+        .btn-dark:hover { background-color: #1e293b; }
+
+        .btn-secondary {
+            @extend .btn-base;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            padding: 1rem 2.5rem;
+            border-radius: 1rem;
+        }
+        .btn-secondary:hover { background-color: #e2e8f0; }
+
+        .btn-outline {
+            @extend .btn-base;
+            background-color: transparent;
+            color: #0f172a;
+            border: 2px solid #e2e8f0;
+            padding: 0.75rem 2rem;
+            border-radius: 0.75rem;
+        }
+        .btn-outline:hover { border-color: #2563eb; color: #2563eb; background-color: #eff6ff; }
+
+        .animate-bounce-slow {
+          animation: bounce 3s infinite;
+        }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(-5%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
+          50% { transform: none; animation-timing-function: cubic-bezier(0,0,0.2,1); }
         }
     </style>
     <script type="importmap">
