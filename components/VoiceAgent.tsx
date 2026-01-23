@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenAI, Modality, LiveServerMessage, Blob } from '@google/genai';
 import { encode, decode, decodeAudioData } from '../utils/audioUtils';
@@ -96,6 +95,7 @@ export const VoiceAgent: React.FC = () => {
       if (!process.env.API_KEY) throw new Error("API Key missing");
 
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // Guideline: Create a new GoogleGenAI instance right before making an API call to ensure it uses the latest key.
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       
       audioContextInRef.current = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
@@ -116,17 +116,20 @@ export const VoiceAgent: React.FC = () => {
 
             scriptProcessor.onaudioprocess = (e) => {
               const inputData = e.inputBuffer.getChannelData(0);
-              const int16 = new Int16Array(inputData.length);
-              for (let i = 0; i < inputData.length; i++) {
-                int16[i] = Math.max(-1, Math.min(1, inputData[i])) * 32767;
+              const l = inputData.length;
+              const int16 = new Int16Array(l);
+              for (let i = 0; i < l; i++) {
+                // Guideline: Implement raw PCM encoding by multiplying by 32768.
+                int16[i] = inputData[i] * 32768;
               }
               const pcmBlob: Blob = {
                 data: encode(new Uint8Array(int16.buffer)),
                 mimeType: 'audio/pcm;rate=16000',
               };
               
+              // Guideline: Solely rely on sessionPromise resolves to send data.
               sessionPromise.then(session => {
-                if (session) session.sendRealtimeInput({ media: pcmBlob });
+                session.sendRealtimeInput({ media: pcmBlob });
               });
             };
 
@@ -154,6 +157,7 @@ export const VoiceAgent: React.FC = () => {
             if (base64Audio) {
               setIsSpeaking(true);
               const ctx = audioContextOutRef.current!;
+              // Guideline: Track next startTime to ensure gapless audio playback.
               nextStartTimeRef.current = Math.max(nextStartTimeRef.current, ctx.currentTime);
               
               const audioBuffer = await decodeAudioData(decode(base64Audio), ctx, 24000, 1);
@@ -172,9 +176,9 @@ export const VoiceAgent: React.FC = () => {
             }
 
             if (message.serverContent?.interrupted) {
-              sourcesRef.current.forEach(s => {
-                try { s.stop(); } catch(e) {}
-              });
+              for (const source of sourcesRef.current) {
+                try { source.stop(); } catch(e) {}
+              }
               sourcesRef.current.clear();
               nextStartTimeRef.current = 0;
               setIsSpeaking(false);
@@ -212,16 +216,20 @@ export const VoiceAgent: React.FC = () => {
   };
 
   const finalizeMessages = () => {
+    // Guideline: Copy transcription values to local variables before clearing.
+    const fullInput = currentInputText.current;
+    const fullOutput = currentOutputText.current;
+    
     setMessages(prev => {
       const finalOnes = prev.filter(m => m.isFinal);
       const newFinals: Message[] = [];
-      if (currentInputText.current) newFinals.push({ role: 'user', text: currentInputText.current, isFinal: true });
-      if (currentOutputText.current) newFinals.push({ role: 'assistant', text: currentOutputText.current, isFinal: true });
-      
-      currentInputText.current = '';
-      currentOutputText.current = '';
+      if (fullInput) newFinals.push({ role: 'user', text: fullInput, isFinal: true });
+      if (fullOutput) newFinals.push({ role: 'assistant', text: fullOutput, isFinal: true });
       return [...finalOnes, ...newFinals];
     });
+
+    currentInputText.current = '';
+    currentOutputText.current = '';
   };
 
   return (

@@ -1,10 +1,9 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
+// Guideline: Create a new GoogleGenAI instance right before making an API call to ensure it always uses the most up-to-date API key.
 export async function getCostComparison(role: string, region: string) {
   try {
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: `Provide a cost comparison for hiring a ${role} in ${region} vs hiring through Connectcare Services (India-based). 
@@ -31,8 +30,10 @@ export async function getCostComparison(role: string, region: string) {
   }
 }
 
+// Guideline: Create a new GoogleGenAI instance right before making an API call.
 export async function classifyInquiryIntent(message: string) {
   try {
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: `Classify the following recruitment inquiry message into 'Employer', 'Candidate', or 'General'.
