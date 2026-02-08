@@ -1,11 +1,11 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
-// Guideline: Create a new GoogleGenAI instance right before making an API call to ensure it always uses the most up-to-date API key.
+// Guideline: Use gemini-flash-lite-latest for low-latency tasks.
 export async function getCostComparison(role: string, region: string) {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-flash-lite-latest",
       contents: `Provide a cost comparison for hiring a ${role} in ${region} vs hiring through Connectcare Services (India-based). 
                  Highlight that local costs are typically $15-30/hour while Connectcare provides talent at 60-70% less (around $4.5-5/hour). 
                  Format the output in a short JSON structure with localAvg, nexusAvg, and savingsPercentage.`,
@@ -30,12 +30,11 @@ export async function getCostComparison(role: string, region: string) {
   }
 }
 
-// Guideline: Create a new GoogleGenAI instance right before making an API call.
 export async function classifyInquiryIntent(message: string) {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-flash-lite-latest",
       contents: `Classify the following recruitment inquiry message into 'Employer', 'Candidate', or 'General'.
                  Message: "${message}"`,
       config: {

@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import * as Icons from './Icons';
 
-const LogoIcon = ({ className = "w-12 h-12" }: { className?: string }) => (
-  <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Connectcare Logo">
-    <defs>
-      <linearGradient id="nexusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#64FFDA" />
-        <stop offset="100%" stopColor="#0ea5e9" />
-      </linearGradient>
-    </defs>
-    <path d="M30 50C30 38.9543 38.9543 30 50 30C61.0457 30 70 38.9543 70 50C70 61.0457 61.0457 70 50 70C38.9543 70 30 61.0457 30 50Z" stroke="url(#nexusGrad)" strokeWidth="2" strokeDasharray="5 5"/>
-    <path d="M25 50C25 36.1929 36.1929 25 50 25C63.8071 25 75 36.1929 75 50C75 63.8071 63.8071 75 50 75" stroke="url(#nexusGrad)" strokeWidth="8" strokeLinecap="round" style={{ opacity: 0.8 }}/>
-    <path d="M35 50C35 41.7157 41.7157 35 50 35C58.2843 35 65 41.7157 65 50C65 58.2843 58.2843 65 50 65" stroke="white" strokeWidth="4" strokeLinecap="round" style={{ opacity: 0.3 }}/>
-    <circle cx="50" cy="50" r="4" fill="#64FFDA"><animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/></circle>
+const WA_NUMBER = "918460335032";
+const getWaLink = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+const LogoIcon = ({ className = "w-10 h-10" }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" />
+    <path d="M30 50C30 38.9543 38.9543 30 50 30C61.0457 30 70 38.9543 70 50" stroke="#8B5CF6" strokeWidth="8" strokeLinecap="round" />
+    <circle cx="50" cy="50" r="8" fill="white" className="animate-pulse" />
   </svg>
 );
 
 const Logo = ({ size = "md", onClick }: { size?: string, onClick?: () => void }) => {
   const isSmall = size === "sm";
   return (
-    <div className="flex items-center gap-5 group cursor-pointer" onClick={onClick} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && onClick?.()}>
-      <div className={`relative flex items-center justify-center rounded-2xl border border-white/10 bg-[#0A192F] shadow-[0_0_30px_rgba(100,255,218,0.1)] transition-all duration-700 group-hover:scale-105 ${isSmall ? 'w-12 h-12' : 'w-20 h-20'}`}>
-        <LogoIcon className={isSmall ? "w-8 h-8" : "w-14 h-14"} />
+    <div className="flex items-center gap-3 md:gap-4 group cursor-pointer" onClick={onClick}>
+      <div className={`relative flex items-center justify-center rounded-full border border-white/10 bg-black shadow-[0_0_30px_rgba(139,92,246,0.15)] transition-all duration-700 group-hover:scale-110 ${isSmall ? 'w-8 h-8 md:w-10 md:h-10' : 'w-12 h-12 md:w-16 md:h-16'}`}>
+        <LogoIcon className={isSmall ? "w-5 h-5 md:w-6 md:h-6" : "w-8 h-8 md:w-10 md:h-10"} />
       </div>
       <div className="flex flex-col leading-none">
-        <span className={`font-black tracking-tighter ${isSmall ? 'text-lg' : 'text-2xl'} text-white uppercase`}>CONNECTCARE <span className="text-[#64FFDA] lowercase font-medium">services</span></span>
-        <span className={`font-black tracking-[0.3em] ${isSmall ? 'text-[7px]' : 'text-[10px]'} text-slate-500 uppercase mt-1`}>Building Global Brands</span>
+        <span className={`font-heading font-extrabold tracking-tighter ${isSmall ? 'text-base md:text-lg' : 'text-lg md:text-xl'} text-white uppercase`}>CONNECTCARE</span>
+        <span className={`font-manrope font-bold tracking-[0.4em] ${isSmall ? 'text-[6px] md:text-[7px]' : 'text-[7px] md:text-[8px]'} text-purple-500 uppercase mt-1`}>Global Services</span>
       </div>
     </div>
   );
@@ -32,62 +30,130 @@ const Logo = ({ size = "md", onClick }: { size?: string, onClick?: () => void })
 
 export const Layout: React.FC<{ children: React.ReactNode; onActionTrigger?: (type: 'Employer' | 'Candidate' | 'General') => void; onNavigate?: (target: 'home' | 'services') => void }> = ({ children, onActionTrigger, onNavigate }) => {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navigateTo = (target: 'home' | 'services') => {
+    onNavigate?.(target);
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <div className="min-h-screen relative">
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? 'bg-[#020617]/90 backdrop-blur-2xl border-b border-white/10 py-4 shadow-2xl' : 'bg-transparent py-10'}`}>
+    <div className="min-h-screen relative w-full overflow-x-hidden">
+      <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ${scrolled || mobileMenuOpen ? 'bg-black/90 backdrop-blur-2xl border-b border-white/5 py-4' : 'bg-transparent py-6 md:py-8'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
-          <Logo size={scrolled ? "sm" : "md"} onClick={() => onNavigate?.('home')} />
-          <nav className="hidden lg:flex items-center gap-12" aria-label="Main Navigation">
-            <button onClick={() => onNavigate?.('home')} className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-400 hover:text-[#64FFDA] transition-colors">Home</button>
-            <button onClick={() => onNavigate?.('services')} className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-400 hover:text-[#64FFDA] transition-colors">Services</button>
-            <button onClick={() => onActionTrigger?.('Employer')} className="bg-[#64FFDA] text-[#020617] px-10 py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] shadow-xl hover:scale-105 transition-all">Hire Talent</button>
+          <Logo size={scrolled ? "sm" : "md"} onClick={() => navigateTo('home')} />
+          
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-10 font-manrope">
+            <button onClick={() => onNavigate?.('home')} className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/40 hover:text-white transition-colors">Origins</button>
+            <button onClick={() => onNavigate?.('services')} className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/40 hover:text-white transition-colors">Portfolios</button>
+            <button 
+              onClick={() => window.open(getWaLink("Hi Connectcare, I'd like to scale my company."), '_blank')} 
+              className="px-8 py-4 bg-white text-black rounded-xl text-[9px] font-bold uppercase tracking-[0.2em] hover:bg-purple-500 hover:text-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+            >
+              Consult Now
+            </button>
           </nav>
+
+          {/* Mobile Menu Trigger */}
+          <button 
+            className="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-[110]"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <motion.span 
+              animate={mobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+              className="w-6 h-0.5 bg-white rounded-full origin-center"
+            ></motion.span>
+            <motion.span 
+              animate={mobileMenuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
+              className="w-6 h-0.5 bg-white rounded-full"
+            ></motion.span>
+            <motion.span 
+              animate={mobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+              className="w-6 h-0.5 bg-white rounded-full origin-center"
+            ></motion.span>
+          </button>
         </div>
       </header>
-      <main className="relative z-10">{children}</main>
-      <footer className="bg-[#020617] text-slate-500 py-32 border-t border-white/5 relative z-10" aria-label="Footer Section">
-        <div className="container mx-auto px-6 text-center lg:text-left">
-          <div className="grid lg:grid-cols-4 gap-20 mb-24">
-            <div>
+
+      {/* Mobile Nav Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[90] bg-black pt-32 pb-10 px-6 lg:hidden flex flex-col gap-12 overflow-y-auto"
+          >
+            <div className="flex flex-col gap-8">
+              <button 
+                onClick={() => navigateTo('home')} 
+                className="text-4xl font-heading font-extrabold tracking-tighter text-white/40 hover:text-white text-left transition-colors"
+              >
+                ORIGINS
+              </button>
+              <button 
+                onClick={() => navigateTo('services')} 
+                className="text-4xl font-heading font-extrabold tracking-tighter text-white/40 hover:text-white text-left transition-colors"
+              >
+                PORTFOLIOS
+              </button>
+              <button 
+                onClick={() => window.open(getWaLink("Hi Connectcare, I'd like to hire elite talent."), '_blank')} 
+                className="text-4xl font-heading font-extrabold tracking-tighter text-purple-500 hover:text-purple-400 text-left transition-colors"
+              >
+                CONSULT NOW
+              </button>
+            </div>
+            
+            <div className="mt-auto border-t border-white/10 pt-10 space-y-4">
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Connect Globally</p>
+              <div className="flex gap-6">
+                <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white"><Icons.IconPhone size={20} /></a>
+                <a href="https://linkedin.com" target="_blank" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white"><Icons.IconExecutive size={20} /></a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+      <main className="relative z-10 w-full overflow-x-hidden">{children}</main>
+      
+      <footer className="bg-black py-16 md:py-24 border-t border-white/5 relative z-10">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 md:gap-16 mb-16 md:mb-20">
+            <div className="lg:col-span-2">
               <Logo size="sm" onClick={() => onNavigate?.('home')} />
-              <p className="mt-10 text-base leading-relaxed max-w-xs text-slate-400">Transforming your business into a global brand by deploying elite talent hubs engineered for scale.</p>
+              <p className="mt-6 md:mt-8 text-sm md:text-base text-slate-500 font-light max-w-sm leading-relaxed">Scaling businesses into global brands through premium India-based talent hubs. ISO 9001:2015 Certified Excellence.</p>
             </div>
-            <div>
-              <h4 className="text-white font-black mb-10 uppercase tracking-[0.4em] text-[11px]">Specialized Sectors</h4>
-              <ul className="space-y-5 text-sm font-bold">
-                <li>IT & AI Engineering</li>
-                <li>Bookkeeping & Finance</li>
-                <li>24/7 CX Excellence</li>
-                <li>Pharma & Research</li>
+            <div className="font-manrope">
+              <h4 className="text-white text-[9px] font-bold mb-6 md:mb-8 uppercase tracking-[0.4em]">Sectors</h4>
+              <ul className="space-y-3 md:space-y-4 text-xs text-slate-600 font-bold uppercase tracking-widest">
+                <li className="hover:text-purple-400 cursor-pointer transition-colors">IT & Engineering</li>
+                <li className="hover:text-purple-400 cursor-pointer transition-colors">Finance Hub</li>
+                <li className="hover:text-purple-400 cursor-pointer transition-colors">CX Excellence</li>
+                <li className="hover:text-purple-400 cursor-pointer transition-colors">Solar Energy</li>
               </ul>
             </div>
-            <div>
-              <h4 className="text-white font-black mb-10 uppercase tracking-[0.4em] text-[11px]">Resources</h4>
-              <ul className="space-y-5 text-sm font-bold">
-                <li><button onClick={() => onNavigate?.('home')} className="hover:text-[#64FFDA] transition-colors">Nexus Home</button></li>
-                <li><button onClick={() => onNavigate?.('services')} className="hover:text-[#64FFDA] transition-colors">Portfolios</button></li>
-                <li>ISO 9001:2015 Hub</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-black mb-10 uppercase tracking-[0.4em] text-[11px]">Direct Line</h4>
-              <div className="space-y-5 text-sm font-bold">
-                <p><i className="fas fa-envelope text-[#64FFDA] mr-4" aria-hidden="true"></i> connectcare206@gmail.com</p>
-                <p><i className="fas fa-phone text-[#64FFDA] mr-4" aria-hidden="true"></i> +91 8460335032</p>
-                <div className="flex gap-6 mt-10 justify-center lg:justify-start">
-                  <a href="https://wa.me/918460335032" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:border-green-400 bg-white/5 transition-colors" aria-label="Contact on WhatsApp"><i className="fab fa-whatsapp"></i></a>
-                  <a href="https://www.linkedin.com/company/connectcare-services/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:border-blue-400 bg-white/5 transition-colors" aria-label="Visit LinkedIn Page"><i className="fab fa-linkedin-in"></i></a>
-                </div>
+            <div className="font-manrope">
+              <h4 className="text-white text-[9px] font-bold mb-6 md:mb-8 uppercase tracking-[0.4em]">Connect</h4>
+              <div className="flex gap-4">
+                <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors"><Icons.IconPhone size={18} /></a>
+                <a href="https://linkedin.com" target="_blank" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors"><Icons.IconExecutive size={18} /></a>
               </div>
             </div>
           </div>
-          <p className="text-[11px] font-black uppercase tracking-[0.3em]">&copy; 2025 Connectcare Services. ISO 9001:2015 Certified. Build Your Brand.</p>
+          <div className="pt-8 md:pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <p className="text-[7px] md:text-[8px] font-bold text-slate-700 uppercase tracking-[0.3em]">&copy; 2025 CONNECTCARE SERVICES. ALL RIGHTS RESERVED.</p>
+            <p className="text-[7px] md:text-[8px] font-bold text-purple-900 uppercase tracking-[0.3em]">Ahmedabad • San Francisco • London • Sydney</p>
+          </div>
         </div>
       </footer>
     </div>

@@ -1,27 +1,59 @@
-
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Layout } from './components/Layout';
 import { AICostCalculator } from './components/AICostCalculator';
 import { VoiceAgent } from './components/VoiceAgent';
 import { InquiryAssistant } from './components/InquiryAssistant';
+import { GlobalFootprint } from './components/GlobalFootprint';
 import { PROCESS_STEPS } from './constants';
 import { InquiryType } from './types';
 import { ServicesPage } from './ServicesPage';
+import * as Icons from './components/Icons';
 
-const LogoIcon = ({ className = "w-full h-full" }: { className?: string }) => (
-  <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="medallionGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#64FFDA" />
-        <stop offset="100%" stopColor="#3b82f6" />
-      </linearGradient>
-    </defs>
-    <path d="M25 50C25 36.1929 36.1929 25 50 25C63.8071 25 75 36.1929 75 50C75 63.8071 63.8071 75 50 75" stroke="url(#medallionGrad)" strokeWidth="6" strokeLinecap="round"/>
-    <path d="M35 50C35 41.7157 41.7157 35 50 35C58.2843 35 65 41.7157 65 50" stroke="white" strokeOpacity="0.4" strokeWidth="4" strokeLinecap="round"/>
-    <circle cx="50" cy="50" r="5" fill="#64FFDA">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite" />
-    </circle>
-  </svg>
+const WA_NUMBER = "918460335032";
+const getWaLink = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+const SolarEclipseLogo = () => (
+  <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px] flex items-center justify-center">
+    {/* Atmospheric Glow */}
+    <div className="absolute inset-0 bg-blue-500/10 rounded-full blur-[60px] md:blur-[120px] animate-pulse"></div>
+    
+    {/* Rotating Cosmic Rings */}
+    <motion.div 
+      animate={{ rotate: 360 }}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+      className="absolute inset-0 border border-white/5 rounded-full"
+    ></motion.div>
+    
+    <motion.div 
+      animate={{ rotate: -360 }}
+      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      className="absolute inset-8 md:inset-12 border border-purple-500/20 rounded-full border-dashed"
+    ></motion.div>
+    
+    {/* The Core Medallion */}
+    <motion.div 
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 2, ease: "circOut" }}
+      className="relative z-10 w-40 h-40 sm:w-48 sm:h-48 md:w-80 md:h-80 bg-black rounded-full border border-white/10 flex items-center justify-center shadow-[0_0_60px_rgba(139,92,246,0.15)] md:shadow-[0_0_100px_rgba(139,92,246,0.2)] overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10"></div>
+      
+      {/* Dynamic Brand Icon */}
+      <svg viewBox="0 0 100 100" className="w-1/2 h-1/2" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="40" stroke="white" strokeWidth="0.5" strokeDasharray="2 4" opacity="0.2" />
+        <path d="M20 50C20 33.4315 33.4315 20 50 20C66.5685 20 80 33.4315 80 50C80 66.5685 66.5685 80 50 80" stroke="url(#galaxyGrad)" strokeWidth="6" strokeLinecap="round" />
+        <defs>
+          <linearGradient id="galaxyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#8B5CF6" />
+            <stop offset="100%" stopColor="#0EA5E9" />
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="6" fill="white" />
+      </svg>
+    </motion.div>
+  </div>
 );
 
 const App: React.FC = () => {
@@ -30,7 +62,14 @@ const App: React.FC = () => {
 
   const handleHeroAction = (type: InquiryType) => {
     setActiveInquiryTrigger({ type, key: Date.now() });
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    const contactEl = document.getElementById('contact');
+    if (contactEl) {
+      contactEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleWhatsAppAction = (message: string) => {
+    window.open(getWaLink(message), '_blank');
   };
 
   const handleNavigate = (target: 'home' | 'services') => {
@@ -38,155 +77,178 @@ const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  return (
-    <Layout onActionTrigger={handleHeroAction} onNavigate={handleNavigate}>
-      {view === 'home' ? (
-        <>
-          <section className="relative min-h-screen pt-40 pb-20 flex items-center overflow-visible">
-            <div className="container mx-auto px-6 relative z-10">
-              <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-32">
-                <div className="lg:w-3/5 text-center lg:text-left flex flex-col">
-                  <div className="inline-flex items-center gap-4 px-6 py-3 bg-[#64FFDA]/5 border border-[#64FFDA]/10 text-[#64FFDA] rounded-full text-[11px] font-black uppercase tracking-[0.2em] mb-10 w-fit self-center lg:self-start">
-                    <span className="flex h-2.5 w-2.5 rounded-full bg-[#64FFDA] animate-pulse"></span>
-                    Connectcare: We make your company a brand
-                  </div>
-                  
-                  <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black text-white mb-10 leading-[0.9] tracking-tighter">
-                    Sourcing <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#64FFDA] via-cyan-400 to-blue-500">Global Elite.</span>
-                  </h1>
-                  
-                  <p className="text-xl md:text-2xl text-slate-300 mb-14 max-w-2xl leading-relaxed font-medium">
-                    Empowering your vision to build a global powerhouse. We source specialized talent from India to scale firms in <span className="text-white font-bold border-b-2 border-[#64FFDA]/30 pb-1">USA, UK, Canada & AU.</span>
-                  </p>
-                  
-                  <div className="flex flex-col sm:flex-row gap-8 justify-center lg:justify-start mb-24">
-                    <button 
-                      onClick={() => handleHeroAction('Employer')}
-                      className="bg-[#64FFDA] text-[#020617] px-16 py-7 rounded-3xl font-black text-[13px] uppercase tracking-[0.2em] shadow-2xl hover:shadow-[0_0_50px_rgba(100,255,218,0.5)] transition-all hover:-translate-y-1.5 active:scale-95"
-                    >
-                      Hire Talent Now
-                    </button>
-                    <button 
-                      onClick={() => handleNavigate('services')}
-                      className="border border-white/20 text-white px-16 py-7 rounded-3xl font-black text-[13px] uppercase tracking-[0.2em] hover:border-[#64FFDA] hover:text-[#64FFDA] transition-all bg-white/5 backdrop-blur-md"
-                    >
-                      Explore Hubs
-                    </button>
-                  </div>
+  const getProcessIcon = (iconName: string) => {
+    switch(iconName) {
+      case 'fa-comments': return <Icons.IconEmail size={32} />;
+      case 'fa-magnifying-glass': return <Icons.IconMagnify size={32} />;
+      case 'fa-user-check': return <Icons.IconUserCheck size={32} />;
+      default: return <Icons.IconSatellite size={32} />;
+    }
+  };
 
-                  <div className="flex flex-col gap-6 items-center lg:items-start opacity-70 hover:opacity-100 transition-opacity">
-                    <div className="flex items-center gap-3 px-10 py-4 bg-[#64FFDA]/5 border border-[#64FFDA]/20 rounded-[1.5rem] backdrop-blur-xl group hover:border-[#64FFDA] transition-all w-fit">
-                       <i className="fas fa-certificate text-[#64FFDA] text-lg group-hover:rotate-12 transition-transform"></i>
-                       <span className="text-[10px] font-black uppercase tracking-widest text-[#64FFDA]">ISO 9001:2015 CERTIFIED GLOBAL HUB</span>
-                    </div>
+  return (
+    <Layout 
+      onActionTrigger={(type) => {
+        if (type === 'Employer') {
+          handleWhatsAppAction("Hi Connectcare, I’d like to scale my company with elite talent.");
+        } else {
+          handleHeroAction(type);
+        }
+      }} 
+      onNavigate={handleNavigate}
+    >
+      <AnimatePresence mode="wait">
+        {view === 'home' ? (
+          <motion.div
+            key="home"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            className="w-full"
+          >
+            {/* GALAXY HERO */}
+            <section className="relative min-h-[90vh] md:min-h-screen pt-32 pb-16 md:pt-44 md:pb-20 flex items-center overflow-hidden">
+              <div className="container mx-auto px-6 relative z-10">
+                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-0">
+                  <div className="lg:w-3/5 text-center lg:text-left order-2 lg:order-1">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 text-white/60 rounded-full text-[8px] md:text-[9px] font-bold uppercase tracking-[0.3em] md:tracking-[0.5em] mb-8 md:mb-12"
+                    >
+                      <span className="flex h-1.5 w-1.5 rounded-full bg-purple-500 animate-pulse"></span>
+                      ISO 9001:2015 Hub • India
+                    </motion.div>
+                    
+                    <motion.h1 
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 1, ease: "easeOut" }}
+                      className="hero-title mb-8 md:mb-10 tracking-tighter"
+                    >
+                      Beyond <br />
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400">Boundaries.</span>
+                    </motion.h1>
+                    
+                    <motion.p 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.4 }}
+                      className="text-base md:text-xl lg:text-2xl text-slate-400 mb-10 md:mb-16 max-w-2xl leading-relaxed font-light mx-auto lg:mx-0"
+                    >
+                      Engineered recruitment for global brands. Deploying elite India-based talent hubs at <span className="text-white font-semibold">70% lower costs</span> for USA, UK, and AU enterprises.
+                    </motion.p>
+                    
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 }}
+                      className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center lg:justify-start"
+                    >
+                      <button 
+                        onClick={() => handleWhatsAppAction("Hi Connectcare, I’d like to hire elite talent.")}
+                        className="btn-neon px-8 py-5 md:px-12 md:py-6 rounded-2xl font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] shadow-xl"
+                      >
+                        Initiate Hiring
+                      </button>
+                      <button 
+                        onClick={() => handleNavigate('services')}
+                        className="border border-white/10 text-white px-8 py-5 md:px-12 md:py-6 rounded-2xl font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] hover:bg-white/5 transition-all"
+                      >
+                        Explore Portfolios
+                      </button>
+                    </motion.div>
                   </div>
-                </div>
-                
-                <div className="lg:w-2/5 flex justify-center perspective-1000">
-                  <div className="globe-container">
-                     <div className="globe">
-                        <LogoIcon className="w-[60%] h-[60%]" />
-                     </div>
-                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div className="w-[110%] h-[110%] border border-[#64FFDA]/5 rounded-full animate-ping opacity-10"></div>
-                     </div>
+                  
+                  <div className="lg:w-2/5 flex justify-center lg:justify-end order-1 lg:order-2">
+                    <SolarEclipseLogo />
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          <section className="py-32 relative">
-            <div className="container mx-auto px-6 text-center mb-32">
-              <h2 className="text-[#64FFDA] text-[11px] font-black uppercase tracking-[0.7em] mb-8">Service Portfolios</h2>
-              <h3 className="text-6xl md:text-8xl font-black text-white tracking-tighter">Scale Your Brand.</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-20">
+            <AICostCalculator onSavingsClaimed={() => handleWhatsAppAction("Hi Connectcare, show me how to optimize my ROI with offshore talent.")} />
+            
+            <div className="w-full">
+              <GlobalFootprint />
+            </div>
+
+            {/* PROCESS SECTION */}
+            <section className="py-24 md:py-40 relative">
+              <div className="container mx-auto px-6">
+                <div className="text-center mb-16 md:mb-32">
+                  <h2 className="text-purple-400 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.6em] md:tracking-[0.8em] mb-4 md:mb-6">Mission Control</h2>
+                  <h3 className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-tight">The 48hr Deployment.</h3>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+                  {PROCESS_STEPS.slice(0, 3).map((step, i) => (
+                    <motion.div 
+                      key={i}
+                      whileHover={{ scale: 1.02 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="glass-card p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] relative group overflow-hidden"
+                    >
+                      <div className="text-purple-500/10 text-6xl md:text-8xl font-black absolute top-6 md:top-10 right-8 md:right-12 group-hover:text-purple-500/20 transition-colors pointer-events-none">{step.number}</div>
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-8 md:mb-10">
+                        {getProcessIcon(step.icon)}
+                      </div>
+                      <h4 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 uppercase tracking-tight">{step.title}</h4>
+                      <p className="text-sm md:text-base text-slate-500 leading-relaxed font-light">{step.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="services"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.6 }}
+            className="w-full"
+          >
+            <ServicesPage onAction={(t) => handleWhatsAppAction("Hi Connectcare, I’d like to scale my company.")} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <VoiceAgent />
+
+      {/* FOOTER CTA */}
+      <section id="contact" className="py-24 md:py-40 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 items-center">
+            <div className="lg:w-1/2 text-center lg:text-left">
+              <h3 className="text-4xl md:text-6xl lg:text-8xl font-black text-white mb-8 md:mb-10 tracking-tight leading-tight">Reach the <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Event Horizon.</span></h3>
+              <p className="text-base md:text-xl text-slate-400 mb-10 md:mb-16 leading-relaxed font-light mx-auto lg:mx-0 max-w-lg">Join the ranks of global brands scaling their efficiency through our elite human capital nexus.</p>
+              
+              <div className="space-y-6 md:space-y-8 max-w-md mx-auto lg:mx-0">
                 {[
-                  {title: 'IT & AI Staffing', icon: 'fa-microchip', desc: 'Elite engineers and AI researchers to build your tech brand.'},
-                  {title: 'Bookkeeping Hub', icon: 'fa-calculator', desc: 'Offshore CPAs reducing accounting overheads by over 50%.'},
-                  {title: '24/7 CX Excellence', icon: 'fa-headset', desc: 'High-proficiency voice and support teams for western markets.'}
-                ].map((s, i) => (
-                  <div key={i} className="glass-card p-14 rounded-[4rem] text-left group hover:border-[#64FFDA]/40 transition-all">
-                    <div className="w-16 h-16 bg-[#64FFDA]/5 border border-[#64FFDA]/10 rounded-2xl flex items-center justify-center text-[#64FFDA] text-3xl mb-10 group-hover:scale-110 transition-transform">
-                      <i className={`fas ${s.icon}`}></i>
+                  { Icon: Icons.IconEmail, label: 'connectcare206@gmail.com' },
+                  { Icon: Icons.IconPhone, label: '+91 8460335032' },
+                  { Icon: Icons.IconLocation, label: 'Ahmedabad Tech Hub, India' }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-5 md:gap-6 group cursor-pointer justify-center lg:justify-start" onClick={() => handleWhatsAppAction(`Hi Connectcare, reaching out regarding ${item.label}`)}>
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-black transition-all shrink-0">
+                      <item.Icon size={20} />
                     </div>
-                    <h4 className="text-3xl font-black text-white mb-6 tracking-tight uppercase">{s.title}</h4>
-                    <p className="text-slate-400 font-bold mb-10 leading-relaxed">{s.desc}</p>
-                    <button onClick={() => handleNavigate('services')} className="text-[#64FFDA] font-black uppercase tracking-[0.3em] text-[10px] flex items-center gap-3">
-                      Learn More <i className="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
-                    </button>
+                    <span className="text-sm md:text-lg font-bold text-white/60 group-hover:text-white transition-colors truncate">{item.label}</span>
                   </div>
                 ))}
               </div>
             </div>
-          </section>
-
-          <AICostCalculator onSavingsClaimed={() => handleHeroAction('Employer')} />
-          
-          <section id="process" className="py-40 relative">
-            <div className="container mx-auto px-6">
-              <div className="flex flex-col lg:flex-row gap-40 items-start">
-                <div className="lg:w-1/3 lg:sticky lg:top-48">
-                  <h2 className="text-[#64FFDA] text-[11px] font-black uppercase tracking-[0.7em] mb-10">Operational Model</h2>
-                  <h3 className="text-6xl md:text-7xl font-black text-white leading-[1] mb-12 tracking-tighter">Velocity <br />Hiring.</h3>
-                  <p className="text-xl text-slate-400 font-medium mb-16 leading-relaxed">We optimize the sourcing friction, delivering deployment-ready talent in under 48 hours.</p>
-                  
-                  <div className="p-12 border border-white/5 rounded-[4rem] bg-white/5 backdrop-blur-2xl shadow-2xl">
-                     <div className="text-6xl font-black text-[#64FFDA] mb-3 tracking-tighter">50% ROI</div>
-                     <p className="text-[11px] font-black uppercase tracking-widest text-slate-500">Margin Retention Advantage</p>
-                  </div>
-                </div>
-
-                <div className="lg:w-2/3 relative">
-                  <div className="absolute left-[31px] top-10 bottom-10 w-px bg-gradient-to-b from-[#64FFDA]/40 via-white/5 to-transparent hidden sm:block"></div>
-                  <div className="space-y-24">
-                    {PROCESS_STEPS.map((step, idx) => (
-                      <div key={idx} className="relative pl-0 sm:pl-32 group">
-                        <div className="absolute left-0 top-0 w-20 h-20 rounded-[1.5rem] bg-[#0A192F] border border-[#64FFDA]/20 flex items-center justify-center text-[#64FFDA] text-3xl z-10 hidden sm:flex transition-all group-hover:border-[#64FFDA] group-hover:shadow-[0_0_40px_rgba(100,255,218,0.3)]">
-                          <i className={`fas ${step.icon}`}></i>
-                        </div>
-                        <div className="glass-card p-14 rounded-[4rem] group-hover:translate-x-6 transition-transform">
-                           <span className="text-[11px] font-black text-[#64FFDA] uppercase tracking-[0.5em] mb-6 block opacity-80">PHASE {step.number}</span>
-                           <h4 className="text-4xl font-black text-white mb-8 tracking-tight leading-none uppercase">{step.title}</h4>
-                           <p className="text-slate-400 text-lg leading-relaxed">{step.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+            
+            <div className="lg:w-1/2 w-full">
+              <InquiryAssistant externalTypeTrigger={activeInquiryTrigger?.type} />
             </div>
-          </section>
-        </>
-      ) : (
-        <ServicesPage onAction={handleHeroAction} />
-      )}
-
-      <VoiceAgent />
-
-      <section id="contact" className="py-40 relative">
-        <div className="container mx-auto px-6 flex flex-col lg:flex-row gap-40">
-          <div className="flex-1">
-            <h3 className="text-6xl md:text-8xl font-black text-white mb-12 tracking-tighter">Scale Your <br /><span className="text-[#64FFDA]">Nexus Team.</span></h3>
-            <p className="text-2xl text-slate-400 mb-20 leading-relaxed max-w-xl">We build your company into a global brand. Secure the elite human resources needed to scale global infrastructure with ease.</p>
-            <div className="space-y-12">
-               {[
-                 {icon: 'fa-earth-asia', text: 'HQ in India Tech Hubs, Global Distribution'},
-                 {icon: 'fa-shield-halved', text: '100% Contractual & Legal Compliance Standard'},
-                 {icon: 'fa-bolt', text: '48hr Sourcing-to-Interview Nexus Pipeline'}
-               ].map((item, i) => (
-                 <div key={i} className="flex items-center gap-10 group">
-                    <div className="w-20 h-20 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center text-[#64FFDA] group-hover:bg-[#64FFDA] group-hover:text-[#020617] transition-all duration-700 shadow-2xl">
-                       <i className={`fas ${item.icon} text-2xl`}></i>
-                    </div>
-                    <span className="text-lg font-bold text-slate-300 group-hover:text-white transition-colors">{item.text}</span>
-                 </div>
-               ))}
-            </div>
-          </div>
-          <div className="flex-1">
-            <InquiryAssistant externalTypeTrigger={activeInquiryTrigger?.type} />
           </div>
         </div>
       </section>

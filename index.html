@@ -1,170 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Connectcare Services | Premium Global Recruitment & Offshore Staffing</title>
-    <meta name="description" content="Connectcare Services is a premier global recruitment hub. We help you build your company into a global brand by deploying elite Indian talent at 70% lower costs. ISO 9001:2015 Certified.">
-    <meta name="keywords" content="recruitment, offshore staffing, global talent, India hiring, IT staffing, bookkeeping, CX support, business branding">
-    <meta name="author" content="Connectcare Services">
+    <title>Connectcare Services | Global Recruitment Nexus</title>
+    <meta name="description" content="Premium global recruitment in a galaxy of talent. Build your global brand with elite Indian professionals.">
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://connectcare-services.netlify.app/">
-    <meta property="og:title" content="Connectcare Services | Building Your Global Brand">
-    <meta property="og:description" content="Deploy elite Indian talent at 70% lower costs. Transform your business into a global powerhouse.">
-    <meta property="og:image" content="https://connectcare-services.netlify.app/og-image.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://connectcare-services.netlify.app/">
-    <meta property="twitter:title" content="Connectcare Services | Building Your Global Brand">
-    <meta property="twitter:description" content="Deploy elite Indian talent at 70% lower costs. Transform your business into a global powerhouse.">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700;800&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-deep: #020617;
+            --bg-black: #000000;
+            --galaxy-purple: #8B5CF6;
+            --electric-blue: #0EA5E9;
             --accent-cyan: #64FFDA;
-            --primary-navy: #0A192F;
-            --text-slate: #94a3b8;
         }
 
-        body { 
-          font-family: 'Plus Jakarta Sans', sans-serif; 
-          scroll-behavior: smooth; 
-          background-color: var(--bg-deep);
-          color: #f1f5f9;
+        ::-moz-selection { background: var(--galaxy-purple); color: white; }
+        ::selection { background: var(--galaxy-purple); color: white; }
+
+        html, body {
+          width: 100%;
           overflow-x: hidden;
         }
 
-        h1 { font-weight: 800; letter-spacing: -0.05em; line-height: 0.95; }
-        
-        .bg-canvas {
+        body { 
+          font-family: 'Inter', sans-serif; 
+          background-color: var(--bg-black);
+          color: #ffffff;
+          -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .font-heading {
+          font-family: 'Space Grotesk', sans-serif;
+          letter-spacing: -0.04em;
+        }
+
+        /* Galaxy Background Engine */
+        .galaxy-container {
           position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          top: 0; left: 0; width: 100%; height: 100%;
           z-index: -20;
-          background: var(--bg-deep);
+          background: radial-gradient(circle at 50% 50%, #0c0e1a 0%, #000000 100%);
           overflow: hidden;
-          pointer-events: none;
         }
 
-        .orb {
+        /* Procedural Stars */
+        .stars {
           position: absolute;
-          border-radius: 50%;
-          filter: blur(120px);
-          opacity: 0.12;
-          pointer-events: none;
-          will-change: transform;
+          width: 200%; height: 200%;
+          background-image: 
+            radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+            radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+            radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+            radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+            radial-gradient(1.5px 1.5px at 130px 80px, #fff, rgba(0,0,0,0));
+          background-repeat: repeat;
+          background-size: 200px 200px;
+          opacity: 0.3;
+          animation: starScroll 100s linear infinite;
         }
 
-        .orb-1 { width: 800px; height: 800px; background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%); top: -10%; left: -5%; }
-        .orb-2 { width: 1000px; height: 1000px; background: radial-gradient(circle, #3b82f6 0%, transparent 70%); bottom: -20%; right: -5%; }
+        @keyframes starScroll {
+          from { transform: translate(0, 0); }
+          to { transform: translate(-50px, -50px); }
+        }
 
-        .dot-grid {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: -15;
-          background-image: radial-gradient(rgba(100, 255, 218, 0.04) 1px, transparent 1px);
-          background-size: 50px 50px;
+        /* Nebula Clouds */
+        .nebula {
+          position: absolute;
+          width: 80vw; height: 80vw;
+          border-radius: 50%;
+          filter: blur(150px);
+          opacity: 0.15;
           pointer-events: none;
-          mask-image: linear-gradient(to bottom, black, transparent, black);
+          mix-blend-mode: screen;
+        }
+        .nebula-1 { background: var(--galaxy-purple); top: -20%; left: -10%; animation: drift 30s infinite alternate; }
+        .nebula-2 { background: var(--electric-blue); bottom: -10%; right: -10%; animation: drift 40s infinite alternate-reverse; }
+
+        @keyframes drift {
+          0% { transform: translate(0,0) scale(1); }
+          100% { transform: translate(10%, 10%) scale(1.1); }
+        }
+
+        /* Premium Glassmorphism */
+        .glass-card {
+          backdrop-filter: blur(50px);
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+          border-color: rgba(139, 92, 246, 0.3);
+          background: rgba(255, 255, 255, 0.04);
+          transform: translateY(-5px);
+          box-shadow: 0 30px 60px rgba(139, 92, 246, 0.1);
+        }
+
+        /* Futuristic Hero Text */
+        .hero-title {
+          font-size: clamp(3rem, 10vw, 9.5rem);
+          line-height: 0.9;
+          font-weight: 800;
+        }
+
+        /* Neon Buttons */
+        .btn-neon {
+          position: relative;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: white;
+          overflow: hidden;
+          transition: all 0.4s ease;
+        }
+        .btn-neon:hover {
+          background: white;
+          color: black;
+          box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+          transform: scale(1.02);
         }
 
         #mouseGlow {
           position: fixed;
-          top: 0;
-          left: 0;
-          width: 800px;
-          height: 800px;
-          background: radial-gradient(circle, rgba(100, 255, 218, 0.06) 0%, transparent 70%);
+          top: 0; left: 0; width: 600px; height: 600px;
+          background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
           border-radius: 50%;
           pointer-events: none;
           z-index: -10;
           transform: translate(-50%, -50%);
-          transition: transform 0.1s cubic-bezier(0.23, 1, 0.32, 1);
+          display: none;
         }
 
-        .glass-card {
-          backdrop-filter: blur(25px);
-          background: rgba(10, 25, 47, 0.25);
-          border: 1px solid rgba(100, 255, 218, 0.08);
-          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        @media (min-width: 1024px) {
+          #mouseGlow { display: block; }
         }
 
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(100, 255, 218, 0.2); border-radius: 10px; }
-
-        .globe-container {
-            width: 450px;
-            height: 450px;
-            position: relative;
-            perspective: 2000px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Custom Scrollbar for modern feel */
+        ::-webkit-scrollbar {
+          width: 8px;
         }
-        .globe {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: rgba(10, 25, 47, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform-style: preserve-3d;
-            animation: rotateMedallion 25s linear infinite;
+        ::-webkit-scrollbar-track {
+          background: var(--bg-black);
         }
-
-        @keyframes rotateMedallion {
-            0% { transform: rotateY(0deg) rotateX(10deg); }
-            100% { transform: rotateY(360deg) rotateX(10deg); }
+        ::-webkit-scrollbar-thumb {
+          background: #222;
+          border-radius: 10px;
         }
-
-        @media (max-width: 768px) {
-          .globe-container { width: 280px; height: 280px; }
-          h1 { font-size: 3.5rem !important; }
+        ::-webkit-scrollbar-thumb:hover {
+          background: #333;
         }
     </style>
 <script type="importmap">
 {
   "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
-    "vite": "https://esm.sh/vite@^7.3.1",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+    "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
+    "framer-motion": "https://esm.sh/framer-motion@^12.33.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.3",
+    "vite": "https://esm.sh/vite@^7.3.1"
   }
 }
 </script>
 </head>
 <body>
     <div id="root"></div>
-    <div class="bg-canvas" aria-hidden="true">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
+    <div class="galaxy-container" aria-hidden="true">
+      <div class="stars"></div>
+      <div class="nebula nebula-1"></div>
+      <div class="nebula nebula-2"></div>
     </div>
-    <div class="dot-grid" aria-hidden="true"></div>
     <div id="mouseGlow" aria-hidden="true"></div>
     <script>
       const glow = document.getElementById('mouseGlow');
-      document.addEventListener('mousemove', (e) => {
-        glow.style.left = e.clientX + 'px';
-        glow.style.top = e.clientY + 'px';
+      window.addEventListener('mousemove', (e) => {
+        if (glow) {
+          glow.style.left = e.clientX + 'px';
+          glow.style.top = e.clientY + 'px';
+        }
       });
     </script>
     <script type="module" src="/index.tsx"></script>
