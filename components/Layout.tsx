@@ -17,7 +17,7 @@ const Logo = ({ size = "md", onClick }: { size?: string, onClick?: () => void })
   const isSmall = size === "sm";
   return (
     <div className="flex items-center gap-3 md:gap-4 group cursor-pointer" onClick={onClick}>
-      <div className={`relative flex items-center justify-center rounded-full border border-white/10 bg-black shadow-[0_0_30px_rgba(139,92,246,0.15)] transition-all duration-700 group-hover:scale-105 ${isSmall ? 'p-2' : 'p-3'}`}>
+      <div className={`relative flex items-center justify-center rounded-full border border-white/10 bg-black shadow-[0_0_30px_rgba(139,92,246,0.15)] transition-all duration-700 group-hover:scale-[1.05] ${isSmall ? 'w-9 h-9 md:w-10 md:h-10' : 'w-12 h-12 md:w-14 md:w-14 md:h-14'}`}>
         <LogoIcon className={isSmall ? "w-5 h-5 md:w-6 md:h-6" : "w-8 h-8 md:w-10 md:h-10"} />
       </div>
       <div className="flex flex-col leading-none">
@@ -57,9 +57,9 @@ export const Layout: React.FC<{ children: React.ReactNode; onActionTrigger?: (ty
             <button className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/60 hover:text-white transition-colors duration-300">About Us</button>
             <button 
               onClick={() => window.open(getWaLink("Hi Connectcare, I'd like to discuss staffing solutions."), '_blank')} 
-              className="px-8 py-3 bg-white text-black rounded-lg text-[9px] font-bold uppercase tracking-[0.2em] hover:bg-purple-400 hover:text-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+              className="px-8 py-3 bg-white text-black rounded-lg text-[9px] font-bold uppercase tracking-[0.2em] hover:bg-purple-400 hover:text-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)]"
             >
-              Contact Us
+              Contact
             </button>
           </nav>
 
@@ -113,15 +113,19 @@ export const Layout: React.FC<{ children: React.ReactNode; onActionTrigger?: (ty
                 onClick={() => window.open(getWaLink("Hi Connectcare, I'd like to discuss staffing solutions."), '_blank')} 
                 className="text-3xl font-heading font-extrabold tracking-tighter text-purple-400 hover:text-purple-300 text-left transition-colors duration-300 pt-4 border-t border-white/10"
               >
-                CONTACT US
+                CONTACT
               </button>
             </div>
             
             <div className="mt-auto border-t border-white/10 pt-10 space-y-4">
               <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Connect With Us</p>
               <div className="flex gap-6">
-                <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5 transition-colors"><Icons.IconPhone size={20} /></a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5 transition-colors"><Icons.IconExecutive size={20} /></a>
+                <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5 transition-colors">
+                  <Icons.IconChat size={20} />
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5 transition-colors">
+                  <Icons.IconLinkedin size={20} />
+                </a>
               </div>
             </div>
           </motion.div>
@@ -135,7 +139,7 @@ export const Layout: React.FC<{ children: React.ReactNode; onActionTrigger?: (ty
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 md:gap-16 mb-16 md:mb-20">
             <div className="lg:col-span-2">
               <Logo size="sm" onClick={() => navigateTo('home')} />
-              <p className="mt-6 md:mt-8 text-sm md:text-base text-slate-500 font-light max-w-sm leading-relaxed">Global remote staffing and recruitment outsourcing from India. Building dedicated teams for businesses in Australia, the UK, USA, and worldwide.</p>
+              <p className="mt-6 md:mt-8 text-sm md:text-base text-slate-500 font-light max-w-sm leading-relaxed">Global remote staffing and recruitment outsourcing from India. Building dedicated teams for global businesses across technology, operations, and support.</p>
             </div>
             <div className="font-manrope">
               <h4 className="text-white text-[9px] font-bold mb-6 md:mb-8 uppercase tracking-[0.4em]">Services</h4>
@@ -149,8 +153,12 @@ export const Layout: React.FC<{ children: React.ReactNode; onActionTrigger?: (ty
             <div className="font-manrope">
               <h4 className="text-white text-[9px] font-bold mb-6 md:mb-8 uppercase tracking-[0.4em]">Connect</h4>
               <div className="flex gap-4">
-                <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors"><Icons.IconPhone size={18} /></a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors"><Icons.IconExecutive size={18} /></a>
+                <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors text-white">
+                  <Icons.IconChat size={18} />
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors text-white">
+                  <Icons.IconLinkedin size={18} />
+                </a>
               </div>
             </div>
           </div>
