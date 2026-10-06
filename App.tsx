@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Layout } from './components/Layout';
+import { Layout, NavigationTarget } from './components/Layout';
 import { AICostCalculator } from './components/AICostCalculator';
 import { VoiceAgent } from './components/VoiceAgent';
 import { InquiryAssistant } from './components/InquiryAssistant';
@@ -9,6 +9,8 @@ import { PROCESS_STEPS } from './constants';
 import { InquiryType } from './types';
 import { ServicesPage } from './ServicesPage';
 import * as Icons from './components/Icons';
+import { LandingPage, SeoLinks, SEO_PAGES } from './components/LandingPage';
+import { IndustriesSection } from './components/IndustriesSection';
 
 const WA_NUMBER = "918460335032";
 const getWaLink = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -36,7 +38,7 @@ const SolarEclipseLogo = () => (
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 2, ease: "circOut" }}
-      className="relative z-10 w-40 h-40 sm:w-48 sm:h-48 md:w-80 md:h-80 bg-black rounded-full border border-white/10 flex items-center justify-center shadow-[0_0_60px_rgba(139,92,246,0.15)] md:sh[...]
+      className="relative z-10 w-40 h-40 sm:w-48 sm:h-48 md:w-80 md:h-80 bg-black rounded-full border border-white/10 flex items-center justify-center shadow-[0_0_60px_rgba(139,92,246,0.15)] md:shadow-[0_0_100px_rgba(139,92,246,0.2)] overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10"></div>
       
@@ -58,6 +60,14 @@ const SolarEclipseLogo = () => (
 
 const App: React.FC = () => {
   const [view, setView] = useState<'home' | 'services'>('home');
+  const [path, setPath] = useState(window.location.pathname.replace(/\/$/, '') || '/');
+  React.useEffect(() => {
+    const f = () => setPath(window.location.pathname.replace(/\/$/, '') || '/');
+    window.addEventListener('popstate', f);
+    return () => window.removeEventListener('popstate', f);
+  }, []);
+  const go = (to: string) => { window.history.pushState({}, '', to); setPath(to); window.scrollTo({ top: 0 }); };
+  const seoPage = SEO_PAGES.find(p => '/' + p.slug === path);
   const [activeInquiryTrigger, setActiveInquiryTrigger] = useState<{ type: InquiryType, key: number } | null>(null);
 
   const handleHeroAction = (type: InquiryType) => {
@@ -72,9 +82,24 @@ const App: React.FC = () => {
     window.open(getWaLink(message), '_blank');
   };
 
-  const handleNavigate = (target: 'home' | 'services') => {
-    setView(target);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handleNavigate = (target: NavigationTarget) => {
+    setView('home');
+    const targetIds: Record<Exclude<NavigationTarget, 'home'>, string> = {
+      services: 'services',
+      industries: 'industries',
+      about: 'about',
+      contact: 'contact',
+    };
+    if (window.location.pathname !== '/') {
+      window.history.pushState({}, '', '/');
+      setPath('/');
+      document.title = 'Remote Staffing Company in India | ConnectCare Services';
+    }
+    if (target === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    window.setTimeout(() => document.getElementById(targetIds[target])?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 40);
   };
 
   const getProcessIcon = (iconName: string) => {
@@ -98,7 +123,12 @@ const App: React.FC = () => {
       onNavigate={handleNavigate}
     >
       <AnimatePresence mode="wait">
-        {view === 'home' ? (
+        {seoPage ? (
+          <motion.div key={seoPage.slug} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full">
+            <LandingPage page={seoPage} go={go} onContact={() => handleWhatsAppAction("Hi Connectcare, I'd like to hire remote staff from India.")} />
+            <SeoLinks go={go} current={seoPage.slug} />
+          </motion.div>
+        ) : view === 'home' ? (
           <motion.div
             key="home"
             initial={{ opacity: 0 }}
@@ -115,7 +145,7 @@ const App: React.FC = () => {
                     <motion.div 
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 text-white/60 rounded-full text-[8px] md:text-[9px] font-bold uppercase tracking-[0.3em]"
+                      className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 text-white/60 rounded-full text-[8px] md:text-[9px] font-bold uppercase tracking-[0.3em] md:tracking-[0.5em] mb-8 md:mb-12"
                     >
                       <span className="flex h-1.5 w-1.5 rounded-full bg-purple-500 animate-pulse"></span>
                       ISO 9001:2015 Hub • India
@@ -154,7 +184,7 @@ const App: React.FC = () => {
                       </button>
                       <button 
                         onClick={() => handleNavigate('services')}
-                        className="border border-white/10 text-white px-8 py-5 md:px-12 md:py-6 rounded-2xl font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] hover:border-purple-500/40 hover:bg-white/5 transition-all duration-300"
+                        className="border border-white/10 text-white px-8 py-5 md:px-12 md:py-6 rounded-2xl font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] hover:bg-white/5 transition-all"
                       >
                         Explore Portfolios
                       </button>
@@ -168,6 +198,8 @@ const App: React.FC = () => {
               </div>
             </section>
 
+            <ServicesPage onAction={() => handleWhatsAppAction("Hi Connectcare, I'd like to discuss staffing services.")} />
+            <IndustriesSection />
             <AICostCalculator onSavingsClaimed={() => handleWhatsAppAction("Hi Connectcare, show me how to optimize my ROI with offshore talent.")} />
             
             <div className="w-full">
@@ -175,7 +207,7 @@ const App: React.FC = () => {
             </div>
 
             {/* PROCESS SECTION */}
-            <section className="py-24 md:py-40 relative">
+            <section id="about" className="scroll-mt-24 py-24 md:py-40 relative">
               <div className="container mx-auto px-6">
                 <div className="text-center mb-16 md:mb-32">
                   <h2 className="text-purple-400 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.6em] md:tracking-[0.8em] mb-4 md:mb-6">Mission Control</h2>
@@ -193,7 +225,7 @@ const App: React.FC = () => {
                       transition={{ delay: i * 0.1 }}
                       className="glass-card p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] relative group overflow-hidden"
                     >
-                      <div className="text-purple-500/10 text-6xl md:text-8xl font-black absolute top-6 md:top-10 right-8 md:right-12 group-hover:text-purple-500/20 transition-colors pointer-events-none">{i + 1}</div>
+                      <div className="text-purple-500/10 text-6xl md:text-8xl font-black absolute top-6 md:top-10 right-8 md:right-12 group-hover:text-purple-500/20 transition-colors pointer-events-none">{step.number}</div>
                       <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-8 md:mb-10">
                         {getProcessIcon(step.icon)}
                       </div>
@@ -204,6 +236,7 @@ const App: React.FC = () => {
                 </div>
               </div>
             </section>
+            <SeoLinks go={go} />
           </motion.div>
         ) : (
           <motion.div
@@ -227,8 +260,8 @@ const App: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 items-center">
             <div className="lg:w-1/2 text-center lg:text-left">
-              <h3 className="text-4xl md:text-6xl lg:text-8xl font-black text-white mb-8 md:mb-10 tracking-tight leading-tight">Reach the <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400">Global Talent Edge</span></h3>
-              <p className="text-base md:text-xl text-slate-400 mb-10 md:mb-16 leading-relaxed font-light mx-auto lg:mx-0 max-w-lg">Join the ranks of global brands scaling their efficiency through enterprise-grade remote staffing and recruitment outsourcing from India.</p>
+              <h3 className="text-4xl md:text-6xl lg:text-8xl font-black text-white mb-8 md:mb-10 tracking-tight leading-tight">Reach the <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Event Horizon.</span></h3>
+              <p className="text-base md:text-xl text-slate-400 mb-10 md:mb-16 leading-relaxed font-light mx-auto lg:mx-0 max-w-lg">Join the ranks of global brands scaling their efficiency through our elite human capital nexus.</p>
               
               <div className="space-y-6 md:space-y-8 max-w-md mx-auto lg:mx-0">
                 {[
@@ -236,8 +269,8 @@ const App: React.FC = () => {
                   { Icon: Icons.IconPhone, label: '+91 8460335032' },
                   { Icon: Icons.IconLocation, label: 'Ahmedabad Tech Hub, India' }
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-5 md:gap-6 group cursor-pointer justify-center lg:justify-start" onClick={() => handleWhatsAppAction(`Hi Connectcare, reaching out about remote staffing from India.`)}>
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-black transition-all duration-300">
+                  <div key={i} className="flex items-center gap-5 md:gap-6 group cursor-pointer justify-center lg:justify-start" onClick={() => handleWhatsAppAction(`Hi Connectcare, reaching out regarding ${item.label}`)}>
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-black transition-all shrink-0">
                       <item.Icon size={20} />
                     </div>
                     <span className="text-sm md:text-lg font-bold text-white/60 group-hover:text-white transition-colors truncate">{item.label}</span>
@@ -254,6 +287,9 @@ const App: React.FC = () => {
       </section>
     </Layout>
   );
+};
+
+export default App;
 };
 
 export default App;
