@@ -38,7 +38,7 @@ const SolarEclipseLogo = () => (
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 2, ease: "circOut" }}
-      className="relative z-10 w-40 h-40 sm:w-48 sm:h-48 md:w-80 md:h-80 bg-black rounded-full border border-white/10 flex items-center justify-center shadow-[0_0_60px_rgba(139,92,246,0.15)]"
+      className="relative z-10 w-40 h-40 sm:w-48 sm:h-48 md:w-80 md:h-80 bg-black rounded-full border border-white/10 flex items-center justify-center shadow-[0_0_60px_rgba(139,92,246,0.15)] md:shadow-[0_0_100px_rgba(139,92,246,0.25)]"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10"></div>
       
