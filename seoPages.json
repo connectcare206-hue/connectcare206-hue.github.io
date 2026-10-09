@@ -1,0 +1,142 @@
+[
+  {
+    "slug": "dedicated-developers",
+    "name": "Dedicated Developers",
+    "title": "Hire Dedicated Developers from India | ConnectCare",
+    "description": "Scale your development team with skilled dedicated developers from India. Cost-effective offshore software development solutions.",
+    "h1": "Hire Dedicated Developers from India",
+    "intro": "Access a pool of experienced developers available exclusively for your projects. Our dedicated developers integrate seamlessly with your team and work in your timezone.",
+    "sections": [
+      {
+        "h": "Why Choose Our Dedicated Developers",
+        "p": "Our dedicated developers bring years of experience and expertise across multiple technologies and domains.",
+        "list": [
+          "Experienced professionals with proven track records",
+          "Full-time commitment to your projects",
+          "Regular communication and progress updates",
+          "Flexible engagement models tailored to your needs",
+          "Cost savings up to 60% compared to local hiring"
+        ]
+      },
+      {
+        "h": "Technology Stack",
+        "p": "Our developers are proficient in latest technologies and frameworks.",
+        "list": [
+          "Frontend: React, Vue, Angular, Next.js",
+          "Backend: Node.js, Python, Java, PHP, .NET",
+          "Mobile: React Native, Flutter, Swift, Kotlin",
+          "Cloud: AWS, Azure, Google Cloud",
+          "Databases: PostgreSQL, MongoDB, MySQL, Redis"
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How quickly can you provide dedicated developers?",
+        "a": "We typically deploy developers within 48 hours of finalizing requirements."
+      },
+      {
+        "q": "Can I replace or change the developer?",
+        "a": "Yes, we ensure satisfaction. If a developer doesn't fit, we can provide replacements."
+      },
+      {
+        "q": "What about timezone compatibility?",
+        "a": "Our developers work in your timezone with full overlap hours for better collaboration."
+      }
+    ]
+  },
+  {
+    "slug": "qa-testing",
+    "name": "QA & Testing",
+    "title": "Quality Assurance & Testing Services | ConnectCare",
+    "description": "Comprehensive QA and testing solutions. Manual and automated testing services to ensure software quality and reliability.",
+    "h1": "Professional QA & Testing Services",
+    "intro": "Ensure your software meets the highest quality standards with our comprehensive QA and testing services. From manual to automated testing, we've got you covered.",
+    "sections": [
+      {
+        "h": "Our Testing Services",
+        "p": "We provide end-to-end testing solutions across all platforms and technologies.",
+        "list": [
+          "Functional Testing",
+          "Performance & Load Testing",
+          "Security Testing",
+          "Mobile App Testing",
+          "Automation Testing",
+          "Regression Testing"
+        ]
+      },
+      {
+        "h": "Testing Expertise",
+        "p": "Our QA engineers are certified and experienced in industry-standard testing tools.",
+        "list": [
+          "Selenium, Appium, Cypress",
+          "JIRA, TestRail, Zephyr",
+          "LoadRunner, JMeter",
+          "Manual testing across devices",
+          "Test automation frameworks"
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What testing methodologies do you follow?",
+        "a": "We follow industry best practices including Agile testing, BDD, and continuous testing methodologies."
+      },
+      {
+        "q": "Can you test legacy applications?",
+        "a": "Yes, we have expertise in testing both modern and legacy applications across various platforms."
+      },
+      {
+        "q": "How do you ensure test coverage?",
+        "a": "We use comprehensive test planning and tools to ensure maximum coverage and catch critical issues."
+      }
+    ]
+  },
+  {
+    "slug": "devops-engineering",
+    "name": "DevOps Engineering",
+    "title": "DevOps Engineering & Infrastructure Services | ConnectCare",
+    "description": "Expert DevOps engineers for CI/CD pipelines, cloud infrastructure, and deployment automation.",
+    "h1": "DevOps Engineering & Infrastructure Solutions",
+    "intro": "Accelerate your software delivery with expert DevOps engineers. We design and implement scalable infrastructure and automation solutions.",
+    "sections": [
+      {
+        "h": "DevOps Services",
+        "p": "From infrastructure to deployment, we handle the complete DevOps lifecycle.",
+        "list": [
+          "CI/CD Pipeline Design & Implementation",
+          "Cloud Infrastructure (AWS, Azure, GCP)",
+          "Container & Kubernetes Orchestration",
+          "Infrastructure as Code (Terraform, CloudFormation)",
+          "Monitoring & Log Aggregation",
+          "Security & Compliance"
+        ]
+      },
+      {
+        "h": "Technologies & Tools",
+        "p": "Our DevOps engineers are proficient with industry-leading tools and platforms.",
+        "list": [
+          "Jenkins, GitLab CI, GitHub Actions",
+          "Docker, Kubernetes, ECS",
+          "Terraform, Ansible, CloudFormation",
+          "Prometheus, ELK Stack, Datadog",
+          "AWS, Azure, Google Cloud Platform"
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Do you provide 24/7 infrastructure monitoring?",
+        "a": "Yes, we offer round-the-clock monitoring and support for your infrastructure."
+      },
+      {
+        "q": "Can you help migrate to the cloud?",
+        "a": "Absolutely. We specialize in cloud migration with minimal downtime and risk."
+      },
+      {
+        "q": "What's your approach to infrastructure security?",
+        "a": "We implement security best practices including IAM, VPCs, encryption, and compliance standards."
+      }
+    ]
+  }
+]
