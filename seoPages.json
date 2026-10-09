@@ -1,142 +1,48 @@
 [
-  {
-    "slug": "dedicated-developers",
-    "name": "Dedicated Developers",
-    "title": "Hire Dedicated Developers from India | ConnectCare",
-    "description": "Scale your development team with skilled dedicated developers from India. Cost-effective offshore software development solutions.",
-    "h1": "Hire Dedicated Developers from India",
-    "intro": "Access a pool of experienced developers available exclusively for your projects. Our dedicated developers integrate seamlessly with your team and work in your timezone.",
-    "sections": [
-      {
-        "h": "Why Choose Our Dedicated Developers",
-        "p": "Our dedicated developers bring years of experience and expertise across multiple technologies and domains.",
-        "list": [
-          "Experienced professionals with proven track records",
-          "Full-time commitment to your projects",
-          "Regular communication and progress updates",
-          "Flexible engagement models tailored to your needs",
-          "Cost savings up to 60% compared to local hiring"
-        ]
-      },
-      {
-        "h": "Technology Stack",
-        "p": "Our developers are proficient in latest technologies and frameworks.",
-        "list": [
-          "Frontend: React, Vue, Angular, Next.js",
-          "Backend: Node.js, Python, Java, PHP, .NET",
-          "Mobile: React Native, Flutter, Swift, Kotlin",
-          "Cloud: AWS, Azure, Google Cloud",
-          "Databases: PostgreSQL, MongoDB, MySQL, Redis"
-        ]
-      }
-    ],
-    "faqs": [
-      {
-        "q": "How quickly can you provide dedicated developers?",
-        "a": "We typically deploy developers within 48 hours of finalizing requirements."
-      },
-      {
-        "q": "Can I replace or change the developer?",
-        "a": "Yes, we ensure satisfaction. If a developer doesn't fit, we can provide replacements."
-      },
-      {
-        "q": "What about timezone compatibility?",
-        "a": "Our developers work in your timezone with full overlap hours for better collaboration."
-      }
-    ]
-  },
-  {
-    "slug": "qa-testing",
-    "name": "QA & Testing",
-    "title": "Quality Assurance & Testing Services | ConnectCare",
-    "description": "Comprehensive QA and testing solutions. Manual and automated testing services to ensure software quality and reliability.",
-    "h1": "Professional QA & Testing Services",
-    "intro": "Ensure your software meets the highest quality standards with our comprehensive QA and testing services. From manual to automated testing, we've got you covered.",
-    "sections": [
-      {
-        "h": "Our Testing Services",
-        "p": "We provide end-to-end testing solutions across all platforms and technologies.",
-        "list": [
-          "Functional Testing",
-          "Performance & Load Testing",
-          "Security Testing",
-          "Mobile App Testing",
-          "Automation Testing",
-          "Regression Testing"
-        ]
-      },
-      {
-        "h": "Testing Expertise",
-        "p": "Our QA engineers are certified and experienced in industry-standard testing tools.",
-        "list": [
-          "Selenium, Appium, Cypress",
-          "JIRA, TestRail, Zephyr",
-          "LoadRunner, JMeter",
-          "Manual testing across devices",
-          "Test automation frameworks"
-        ]
-      }
-    ],
-    "faqs": [
-      {
-        "q": "What testing methodologies do you follow?",
-        "a": "We follow industry best practices including Agile testing, BDD, and continuous testing methodologies."
-      },
-      {
-        "q": "Can you test legacy applications?",
-        "a": "Yes, we have expertise in testing both modern and legacy applications across various platforms."
-      },
-      {
-        "q": "How do you ensure test coverage?",
-        "a": "We use comprehensive test planning and tools to ensure maximum coverage and catch critical issues."
-      }
-    ]
-  },
-  {
-    "slug": "devops-engineering",
-    "name": "DevOps Engineering",
-    "title": "DevOps Engineering & Infrastructure Services | ConnectCare",
-    "description": "Expert DevOps engineers for CI/CD pipelines, cloud infrastructure, and deployment automation.",
-    "h1": "DevOps Engineering & Infrastructure Solutions",
-    "intro": "Accelerate your software delivery with expert DevOps engineers. We design and implement scalable infrastructure and automation solutions.",
-    "sections": [
-      {
-        "h": "DevOps Services",
-        "p": "From infrastructure to deployment, we handle the complete DevOps lifecycle.",
-        "list": [
-          "CI/CD Pipeline Design & Implementation",
-          "Cloud Infrastructure (AWS, Azure, GCP)",
-          "Container & Kubernetes Orchestration",
-          "Infrastructure as Code (Terraform, CloudFormation)",
-          "Monitoring & Log Aggregation",
-          "Security & Compliance"
-        ]
-      },
-      {
-        "h": "Technologies & Tools",
-        "p": "Our DevOps engineers are proficient with industry-leading tools and platforms.",
-        "list": [
-          "Jenkins, GitLab CI, GitHub Actions",
-          "Docker, Kubernetes, ECS",
-          "Terraform, Ansible, CloudFormation",
-          "Prometheus, ELK Stack, Datadog",
-          "AWS, Azure, Google Cloud Platform"
-        ]
-      }
-    ],
-    "faqs": [
-      {
-        "q": "Do you provide 24/7 infrastructure monitoring?",
-        "a": "Yes, we offer round-the-clock monitoring and support for your infrastructure."
-      },
-      {
-        "q": "Can you help migrate to the cloud?",
-        "a": "Absolutely. We specialize in cloud migration with minimal downtime and risk."
-      },
-      {
-        "q": "What's your approach to infrastructure security?",
-        "a": "We implement security best practices including IAM, VPCs, encryption, and compliance standards."
-      }
-    ]
-  }
+ {"slug":"remote-staffing-australia","name":"Remote Staffing Australia",
+  "title":"Remote Staffing Australia | Hire Remote Staff from India | ConnectCare",
+  "description":"Remote staffing for Australian businesses. Hire skilled remote accountants, solar sales, support and IT staff from India with ConnectCare Services.",
+  "h1":"Remote Staffing Solutions for Australian Businesses",
+  "intro":"ConnectCare Services helps Australian businesses hire dedicated remote professionals from India. We source, vet and onboard staff so you can grow your team without the full cost and delay of local hiring.",
+  "sections":[
+   {"h":"Hire Remote Staff from India","p":"Remote staff work as an extension of your team, using your tools and processes. You interview the final shortlist and make the hiring decision."},
+   {"h":"Australian Working Hours","p":"India is roughly 4.5 to 5.5 hours behind eastern Australia, depending on daylight saving. Remote staff can work shifts aligned to your business hours, so your customers and team get same-day responses."},
+   {"h":"Roles We Recruit","list":["Solar sales professionals and appointment setters","Accountants and bookkeepers","Customer support representatives","Digital marketing and SEO specialists","IT professionals and developers"]}],
+  "faqs":[
+   {"q":"Can remote staff work Australian hours?","a":"Yes. Shifts can be arranged to overlap with your business hours. Agree the schedule with us before hiring."},
+   {"q":"How much can I save compared with hiring locally?","a":"Businesses can reduce staffing costs by up to 70% compared with equivalent local hiring, depending on role and employment model."},
+   {"q":"Do I choose the final hire?","a":"Yes. We shortlist vetted candidates and you interview them and make the final decision."}]},
+ {"slug":"recruitment-outsourcing","name":"Recruitment Outsourcing India",
+  "title":"Recruitment Outsourcing India | ConnectCare Services",
+  "description":"Outsource recruitment to India. ConnectCare Services handles sourcing, vetting and onboarding for businesses in Australia, the UK, the USA and worldwide.",
+  "h1":"Recruitment Outsourcing from India",
+  "intro":"Hand the sourcing, screening and onboarding of candidates to our India-based recruitment team. You stay in control of the final decision while we do the legwork.",
+  "sections":[
+   {"h":"What Recruitment Outsourcing Covers","list":["Role specification and job briefs","Candidate sourcing and screening","Technical tests and behavioural interviews","Shortlist presentation and interview coordination","Contracts and onboarding support"]},
+   {"h":"Who It Suits","p":"Growing businesses without an in-house recruiter, and teams that need to fill remote or offshore roles quickly across Australia, the UK and the USA."}],
+  "faqs":[
+   {"q":"What is recruitment outsourcing?","a":"It means an external team manages part or all of your hiring process, from sourcing candidates to onboarding."},
+   {"q":"Which countries do you serve?","a":"We work with businesses in Australia, the UK, the USA and other markets."}]},
+ {"slug":"solar-staffing-australia","name":"Solar Staffing Australia",
+  "title":"Solar Sales Staff for Australian Companies | ConnectCare Services",
+  "description":"Hire remote solar sales staff and appointment setters from India for Australian solar companies. Reduce staffing costs with ConnectCare Services.",
+  "h1":"Remote Solar Sales Staff for Australian Solar Companies",
+  "intro":"Australian solar companies need consistent lead follow-up and booked appointments. ConnectCare Services recruits remote sales and support staff from India to cover that workload at a lower staffing cost.",
+  "sections":[
+   {"h":"Roles for Solar Businesses","list":["Appointment setters","Lead qualification and follow-up","Solar sales support","Customer support and after-sales","Admin and data entry"]},
+   {"h":"Why Remote Staff Work for Solar","p":"Lead response speed matters in solar sales. Dedicated remote staff can follow up leads during your business hours without adding local payroll overhead."}],
+  "faqs":[
+   {"q":"Can remote staff call Australian leads?","a":"Yes, staff can be hired for outbound follow-up in Australian hours. Check call and privacy rules that apply to your business."},
+   {"q":"How fast can I start?","a":"Timing depends on the role. Tell us your requirements and we will give a realistic timeline."}]},
+ {"slug":"remote-accountants-australia","name":"Remote Accountants Australia",
+  "title":"Remote Accountants & Bookkeepers for Australia | ConnectCare Services",
+  "description":"Hire remote accountants and bookkeepers from India for Australian businesses and firms. Vetted candidates, flexible hours, lower staffing costs.",
+  "h1":"Hire Remote Accountants and Bookkeepers for Your Australian Business",
+  "intro":"Accounting firms and businesses in Australia use remote accountants from India for bookkeeping, reconciliations and reporting. We recruit and vet candidates so you can build a dedicated back-office team.",
+  "sections":[
+   {"h":"Accounting Roles We Recruit","list":["Bookkeepers","Accounts payable and receivable officers","Payroll and BAS preparation support","Accountants for reporting and reconciliation"]},
+   {"h":"Software Experience","p":"Tell us which software your team uses, such as Xero or MYOB, and we will screen candidates for that experience."}],
+  "faqs":[
+   {"q":"Are the candidates familiar with Australian accounting?","a":"Experience varies by candidate. We screen against your requirements, and you decide who to hire."},
+   {"q":"Is my client data safe?","a":"Agree access controls, confidentiality terms and tools with your remote staff before they start."}]}
 ]
