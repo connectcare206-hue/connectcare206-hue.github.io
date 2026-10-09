@@ -38,7 +38,7 @@ const SolarEclipseLogo = () => (
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 2, ease: "circOut" }}
-      className="relative z-10 w-40 h-40 sm:w-48 sm:h-48 md:w-80 md:h-80 bg-black rounded-full border border-white/10 flex items-center justify-center shadow-[0_0_60px_rgba(139,92,246,0.15)] md:shadow-[0_0_100px_rgba(139,92,246,0.2)] overflow-hidden"
+      className="relative z-10 w-40 h-40 sm:w-48 sm:h-48 md:w-80 md:h-80 bg-black rounded-full border border-white/10 flex items-center justify-center shadow-[0_0_60px_rgba(139,92,246,0.15)]"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10"></div>
       
@@ -115,7 +115,7 @@ const App: React.FC = () => {
     <Layout 
       onActionTrigger={(type) => {
         if (type === 'Employer') {
-          handleWhatsAppAction("Hi Connectcare, I’d like to scale my company with elite talent.");
+          handleWhatsAppAction("Hi Connectcare, I'd like to scale my company with elite talent.");
         } else {
           handleHeroAction(type);
         }
@@ -145,7 +145,7 @@ const App: React.FC = () => {
                     <motion.div 
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 text-white/60 rounded-full text-[8px] md:text-[9px] font-bold uppercase tracking-[0.3em] md:tracking-[0.5em] mb-8 md:mb-12"
+                      className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 text-white/60 rounded-full text-[8px] md:text-[9px] font-bold uppercase tracking-[0.3em]"
                     >
                       <span className="flex h-1.5 w-1.5 rounded-full bg-purple-500 animate-pulse"></span>
                       ISO 9001:2015 Hub • India
@@ -167,7 +167,7 @@ const App: React.FC = () => {
                       transition={{ delay: 0.4 }}
                       className="text-base md:text-xl lg:text-2xl text-slate-400 mb-10 md:mb-16 max-w-2xl leading-relaxed font-light mx-auto lg:mx-0"
                     >
-                      Hire skilled remote professionals from India for Australia, UK, USA and global businesses. Businesses can reduce staffing costs by up to <span className="text-white font-semibold">70%</span> compared with equivalent local hiring, depending on role and employment model.
+                      Hire skilled remote professionals from India for Australia, UK, USA and global businesses. Businesses can reduce staffing costs by up to 60% while accessing world-class talent.
                     </motion.p>
                     
                     <motion.div 
@@ -177,14 +177,14 @@ const App: React.FC = () => {
                       className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center lg:justify-start"
                     >
                       <button 
-                        onClick={() => handleWhatsAppAction("Hi Connectcare, I’d like to hire elite talent.")}
+                        onClick={() => handleWhatsAppAction("Hi Connectcare, I'd like to hire elite talent.")}
                         className="btn-neon px-8 py-5 md:px-12 md:py-6 rounded-2xl font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] shadow-xl"
                       >
                         Initiate Hiring
                       </button>
                       <button 
                         onClick={() => handleNavigate('services')}
-                        className="border border-white/10 text-white px-8 py-5 md:px-12 md:py-6 rounded-2xl font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] hover:bg-white/5 transition-all"
+                        className="border border-white/10 text-white px-8 py-5 md:px-12 md:py-6 rounded-2xl font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em] hover:bg-white/5 transition-colors"
                       >
                         Explore Portfolios
                       </button>
@@ -225,7 +225,7 @@ const App: React.FC = () => {
                       transition={{ delay: i * 0.1 }}
                       className="glass-card p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] relative group overflow-hidden"
                     >
-                      <div className="text-purple-500/10 text-6xl md:text-8xl font-black absolute top-6 md:top-10 right-8 md:right-12 group-hover:text-purple-500/20 transition-colors pointer-events-none">{step.number}</div>
+                      <div className="text-purple-500/10 text-6xl md:text-8xl font-black absolute top-6 md:top-10 right-8 md:right-12 group-hover:text-purple-500/20 transition-colors pointer-events-none">{i + 1}</div>
                       <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-8 md:mb-10">
                         {getProcessIcon(step.icon)}
                       </div>
@@ -247,7 +247,7 @@ const App: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="w-full"
           >
-            <ServicesPage onAction={(t) => handleWhatsAppAction("Hi Connectcare, I’d like to scale my company.")} />
+            <ServicesPage onAction={(t) => handleWhatsAppAction("Hi Connectcare, I'd like to scale my company.")} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -260,8 +260,8 @@ const App: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 items-center">
             <div className="lg:w-1/2 text-center lg:text-left">
-              <h3 className="text-4xl md:text-6xl lg:text-8xl font-black text-white mb-8 md:mb-10 tracking-tight leading-tight">Reach the <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Event Horizon.</span></h3>
-              <p className="text-base md:text-xl text-slate-400 mb-10 md:mb-16 leading-relaxed font-light mx-auto lg:mx-0 max-w-lg">Join the ranks of global brands scaling their efficiency through our elite human capital nexus.</p>
+              <h3 className="text-4xl md:text-6xl lg:text-8xl font-black text-white mb-8 md:mb-10 tracking-tight leading-tight">Reach the <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Global Standard</span></h3>
+              <p className="text-base md:text-xl text-slate-400 mb-10 md:mb-16 leading-relaxed font-light mx-auto lg:mx-0 max-w-lg">Join the ranks of global brands scaling their efficiency through our elite talent network.</p>
               
               <div className="space-y-6 md:space-y-8 max-w-md mx-auto lg:mx-0">
                 {[
@@ -269,8 +269,8 @@ const App: React.FC = () => {
                   { Icon: Icons.IconPhone, label: '+91 8460335032' },
                   { Icon: Icons.IconLocation, label: 'Ahmedabad Tech Hub, India' }
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-5 md:gap-6 group cursor-pointer justify-center lg:justify-start" onClick={() => handleWhatsAppAction(`Hi Connectcare, reaching out regarding ${item.label}`)}>
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-black transition-all shrink-0">
+                  <div key={i} className="flex items-center gap-5 md:gap-6 group cursor-pointer justify-center lg:justify-start" onClick={() => handleWhatsAppAction(`Hi Connectcare, reaching out about ${item.label}`)}>
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-black transition-colors">
                       <item.Icon size={20} />
                     </div>
                     <span className="text-sm md:text-lg font-bold text-white/60 group-hover:text-white transition-colors truncate">{item.label}</span>
