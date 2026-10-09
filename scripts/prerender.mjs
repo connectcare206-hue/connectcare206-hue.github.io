@@ -28,12 +28,39 @@ const homePage = {
 
 const pages = JSON.parse(fs.readFileSync(path.join(rootDir, 'seoPages.json'), 'utf8'));
 
+const buildBreadcrumbSchema = (slug, pageName) => {
+  const items = [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: siteUrl,
+    },
+  ];
+
+  if (slug) {
+    items.push({
+      '@type': 'ListItem',
+      position: 2,
+      name: pageName,
+      item: `${siteUrl}/${slug}`,
+    });
+  }
+
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items,
+  });
+};
+
 const buildPageHtml = (page, slug = '') => {
   const canonical = `${siteUrl}${slug ? `/${slug}` : '/'}`;
   const title = slug ? page.title : homePage.title;
   const description = slug ? page.description : homePage.description;
   const h1 = slug ? page.h1 : homePage.h1;
   const intro = slug ? page.intro : homePage.intro;
+  
   const faqSchema = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -46,6 +73,8 @@ const buildPageHtml = (page, slug = '') => {
       },
     })),
   });
+
+  const breadcrumbSchema = buildBreadcrumbSchema(slug, page.name || '');
 
   const sectionsHtml = (page.sections || [])
     .map(
@@ -87,6 +116,7 @@ const buildPageHtml = (page, slug = '') => {
     <meta name="twitter:description" content="${escapeHtml(description)}" />
     <link rel="canonical" href="${canonical}" />
     <script type="application/ld+json">${faqSchema}</script>
+    <script type="application/ld+json">${breadcrumbSchema}</script>
     <style>
       :root {
         --bg: #0b0f17;
